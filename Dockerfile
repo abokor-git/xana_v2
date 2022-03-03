@@ -19,7 +19,8 @@ WORKDIR /Xana
 
 # running migrations
 RUN python manage.py migrate
+RUN python manage.py runserver
 
 # gunicorn
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
+#CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
 
