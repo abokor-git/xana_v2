@@ -12,10 +12,10 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 class Job(MinutelyJob):
-    help = "Check TopUp data every 5 minutes"
+    help = "report errors with gmail every 2 minutes"
 
     def execute(self):
-        
+
         PROCESS_NUMBER = 1614
 
         """ La date et l'heure """
@@ -224,13 +224,14 @@ class Job(MinutelyJob):
 
         if found:
 
-            message = "TopUp reports errors found"
+            message = "Error TopUp reports errors found"
+            etat = "E"
 
         else:
 
             message = "TopUp does not report errors"
-            
-        etat = "S"
+            etat = "S"
+
         Logs.objects.create(date_time=datetime_now,process=PROCESS_NUMBER,message_description=message,etat=etat)
 
     pass

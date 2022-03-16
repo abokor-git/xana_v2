@@ -1,28 +1,32 @@
-version: '3.8'
+version: '2.4'
+
 services:
-  appseed-app:
-    container_name: appseed_app
+
+  xana-app:
+    container_name: xana-app
     restart: always
-    env_file: .env
+    image: xana-app
     build: .
-    networks:
-      - db_network
-      - web_network
-  nginx:
-    container_name: nginx
-    restart: always
-    image: "nginx:latest"
+    command: bash -c "service cron start && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:80 "
+    network_mode: "host"
     ports:
-      - "85:85"
+      - "80:80"
+    depends_on:
+      - xana-db
     volumes:
-      - ./nginx:/etc/nginx/conf.d
-    networks:
-      - web_network
-    depends_on: 
-      - appseed-app
-networks:
-  db_network:
-    driver: bridge
-  web_network:
-    driver: bridge
- 
+      - .:/home/xana_v2
+
+  xana-db:
+    container_name: xana-db
+    restart: always
+    image: postgres
+    network_mode: "host"
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - TZ=Africa/Djibouti
+      - POSTGRES_DB=xana_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgrespwd
+    ports:
+      - "5432:5432"

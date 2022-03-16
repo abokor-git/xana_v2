@@ -119,7 +119,7 @@ class Job(MinutelyJob):
 
         except mysql.connector.Error as err:
 
-            message = "TopUp database unreachable"
+            message = "Error TopUp database unreachable"
             etat = "E"
             Logs.objects.create(date_time=datetime_now,process=PROCESS_NUMBER,message_description=message,etat=etat)
 

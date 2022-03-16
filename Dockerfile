@@ -1,26 +1,14 @@
-FROM python:3.9
-
-WORKDIR /Xana
-COPY . /Xana
-
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+FROM ubuntu:latest
 
 RUN apt-get update
+RUN apt-get install -y python3.8
+RUN apt-get install -y python3-pip
+
+RUN apt-get install -y git
 RUN apt-get install -y vim
 RUN apt-get install -y cron
 
-# install python dependencies
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r /Xana/requirements.txt
+WORKDIR /home/xana_v2/
+COPY . /home/xana_v2/
 
-WORKDIR /Xana
-
-# running migrations
-RUN python manage.py migrate
-RUN python manage.py runserver
-
-# gunicorn
-#CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
-
+RUN pip install --no-cache-dir -r /home/xana_v2/requirements.txt
