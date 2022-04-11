@@ -183,10 +183,10 @@ class Job(MinutelyJob):
 
             """ Variable email """
             # Set Global Variables
-            gmail_user = 'abokor.ahmed.kadar.nour@gmail.com'
-            gmail_password = 'Mail.gmail.abokor'
+            gmail_user = 'xana.system.v2@outlook.com'
+            gmail_password = 'Xana_v2_system'
             # Create Email 
-            mail_from = 'Abokor Ahmed-Kadar Nour'
+            mail_from = 'Xana System'
             #mail_to = 'nagwa_issam@intnet.dj,mouna_zain@intnet.dj,abdek.housssein@gmail.com,dt.bss.abdifatah@gmail.com,abokor.ahmed.kadar@outlook.com'
             mail_to = 'abokor.ahmed.kadar@outlook.com, abokor.ahmed.kadar.nour@gmail.com'
             mail_subject = 'MONITORING TOPUP REQUEST'
@@ -217,9 +217,10 @@ class Job(MinutelyJob):
             message.attach(MIMEText(mail_message_body, 'html'))
 
             # Sent Email
-            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server = smtplib.SMTP('smtp-mail.outlook.com', 587)
+            server.starttls()
             server.login(gmail_user, gmail_password)
-            server.sendmail(mail_from,mail_to.split(","), message.as_string())
+            server.sendmail("xana.system.v2@outlook.com",mail_to.split(","),msg=message.as_string())
             server.close()
 
         if found:
