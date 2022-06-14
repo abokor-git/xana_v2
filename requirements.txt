@@ -33,8 +33,10 @@ matplotlib>=3.4.3
 XlsxWriter>=3.0.1
 # PowerPoint
 python-pptx>=0.6.21
+# Notification
+notify-run>=0.0.14
 # Requests 
-requests>=2.26.0
+requests>=2.22.0
 # Beautiful Soup
 bs4>=0.0.1
 # Paramiko
@@ -47,5 +49,3 @@ subprocess.run>=0.0.8
 iteration-utilities>=0.11.0
 # Oracle
 cx-Oracle>=8.3.0
-# Notification
-notify-run>=0.0.14
