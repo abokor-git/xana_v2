@@ -6,7 +6,7 @@ services:
     container_name: xana-app
     restart: always
     image: xana-app
-    build: .
+    #build: .
     command: bash -c "service cron start && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:80 "
     network_mode: "host"
     ports:
@@ -29,4 +29,4 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgrespwd
     ports:
-      - "5432:5432"
+      - "5433:5432"

@@ -1,3 +1,5 @@
 */5 * * * * cd /home/xana_v2/ && /bin/python3 manage.py runjob cp_topup_db
 */6 * * * * cd /home/xana_v2/ && /bin/python3 manage.py runjob ch_topup_db
 */2 * * * * cd /home/xana_v2/ && /bin/python3 manage.py runjob re_topup_db
+*/30 * * * * cd /home/xana_v2/ && /bin/python3 manage.py runjob mz_ppbu
+*/5 * * * * cd /home/xana_v2/ && /bin/python3 manage.py runjob ch_vpn

@@ -28,7 +28,7 @@ class Queue(models.Model):
     created_date = models.DateTimeField()
     status = models.IntegerField(null=True)
     updated_date = models.DateTimeField()
-    msisdn = models.CharField(max_length=255)
+    msisdn = models.CharField(max_length=255,null=True)
     pincode = models.CharField(max_length=255,null=True)
     error_code = models.IntegerField(null=True)
     error_description = models.CharField(max_length=255,null=True)
@@ -111,6 +111,23 @@ class AlertConfig(models.Model):
     id = models.BigAutoField(primary_key=True)
     params = models.CharField(max_length=255)
     values = models.CharField(max_length=255)
+
+class FilePPBU(models.Model):
+
+    id = models.BigAutoField(primary_key=True)
+    file = models.CharField(max_length=255)
+    created_date = models.DateTimeField()
+    folder = models.CharField(max_length=255)
+    loaded = models.BooleanField(default=False)
+
+class DataPPBU(models.Model):
+
+    id = models.BigAutoField(primary_key=True)
+    numero = models.CharField(max_length=255)
+    date_recharge = models.DateTimeField()
+    profil_ocs = models.CharField(max_length=255)
+    data = models.CharField(max_length=4000)
+    id_fileppbu = models.ForeignKey(FilePPBU, on_delete=models.CASCADE)
 
 #class HEALTHCHECK(models.Model):
 
