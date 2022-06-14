@@ -4,25 +4,24 @@ services:
 
   xana-app:
     container_name: xana-app
-    restart: always
-    image: xana-app
-    #build: .
-    command: bash -c "service cron start && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:80 "
+    #restart: always
+    image: xana-app:latest
+    command: bash -c " service cron start && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:80 " #apt install -y iputils-ping && ping googe.fr
     network_mode: "host"
     ports:
       - "80:80"
     depends_on:
       - xana-db
     volumes:
-      - .:/home/xana_v2
+      - xana-app:/home/
 
   xana-db:
     container_name: xana-db
     restart: always
-    image: postgres
+    image: postgres:11
     network_mode: "host"
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - xana-db:/var/lib/postgresql/data
     environment:
       - TZ=Africa/Djibouti
       - POSTGRES_DB=xana_db
@@ -30,3 +29,7 @@ services:
       - POSTGRES_PASSWORD=postgrespwd
     ports:
       - "5433:5432"
+      
+volumes:
+  xana-app:
+  xana-db:
